@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="max-w-5xl mx-auto">
+    <h1 class="text-3xl font-extrabold dark:text-white mb-8">My <span class="text-blue-600">Applications</span></h1>
+
+    <div class="grid gap-4">
+        {% for app in applications %}
+        <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 flex justify-between items-center shadow-sm hover:border-blue-500 transition-all">
+            <div>
+                <h3 class="text-xl font-bold dark:text-white">{{ app.job.title }}</h3>
+                <p class="text-blue-600 font-medium">{{ app.job.company_name }}</p>
+                <p class="text-slate-400 text-xs mt-1">Applied on {{ app.applied_at|date }}</p>
+            </div>
+            <div class="text-right">
+                <span class="px-4 py-1 rounded-full text-xs font-bold bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-400">
+                    {{ app.status }}
+                </span>
+                <a href="{% url 'job_detail' app.job.pk %}" class="block mt-2 text-sm text-slate-500 hover:underline">View Job</a>
+            </div>
+        </div>
+        {% empty %}
+        <div class="text-center py-20 bg-slate-50 dark:bg-slate-900/50 rounded-3xl border-2 border-dashed border-slate-200 dark:border-slate-800">
+            <p class="text-slate-500">Aapne abhi tak kisi job ke liye apply nahi kiya hai.</p>
+            <a href="/" class="text-blue-600 font-bold hover:underline">Jobs dhoondein</a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

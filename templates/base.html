@@ -46,6 +46,8 @@
                         <a href="{% url 'post_job' %}" class="text-sm font-bold text-slate-600 dark:text-slate-300 hover:text-blue-500 transition-all">
                             POST A JOB
                         </a>
+                    {% else %}
+                        <a href="{% url 'candidate_dashboard' %}" class="text-sm font-bold text-blue-600 dark:text-blue-400">MY APPS</a>
                     {% endif %}
 
                     <form action="{% url 'logout' %}" method="post" class="inline">

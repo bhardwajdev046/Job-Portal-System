@@ -72,3 +72,13 @@ def employer_dashboard(request):
     my_jobs = Job.objects.filter(user=request.user).prefetch_related('applications')
     
     return render(request, 'jobs/dashboard.html', {'jobs': my_jobs})
+
+@login_required
+def candidate_dashboard(request):
+    if request.user.is_employer:
+        return redirect('employer_dashboard')
+        
+    # User ne jahan apply kiya hai wo saari applications mangwao
+    my_applications = Application.objects.filter(user=request.user).select_related('job')
+    
+    return render(request, 'jobs/candidate_dashboard.html', {'applications': my_applications})
