@@ -41,7 +41,7 @@
                             Already Applied ✅
                         </button>
                     {% else %}
-                        <a href="#" class="block text-center w-full bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-xl font-bold shadow-lg shadow-blue-500/30 transition-all transform hover:-translate-y-1">
+                        <a href="{% url 'apply_job' job.pk %}" class="block text-center w-full bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-xl font-bold shadow-lg shadow-blue-500/30 transition-all transform hover:-translate-y-1">
                             Apply for this Position
                         </a>
                     {% endif %}

@@ -38,3 +38,26 @@ def job_detail(request, pk):
         'job': job,
         'has_applied': has_applied
     })
+    
+@login_required
+def apply_job(request, pk):
+    job = get_object_or_404(Job, pk=pk)
+    
+    # Check karein user Employer toh nahi hai?
+    if request.user.is_employer:
+        return redirect('home')
+
+    if request.method == 'POST':
+        resume = request.FILES.get('resume')
+        cover_letter = request.POST.get('cover_letter')
+        
+        # Application create karein
+        Application.objects.create(
+            job=job,
+            user=request.user,
+            resume=resume,
+            cover_letter=cover_letter
+        )
+        return redirect('job_detail', pk=pk)
+        
+    return render(request, 'jobs/apply_form.html', {'job': job})
