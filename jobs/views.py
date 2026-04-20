@@ -61,3 +61,14 @@ def apply_job(request, pk):
         return redirect('job_detail', pk=pk)
         
     return render(request, 'jobs/apply_form.html', {'job': job})
+
+@login_required
+def employer_dashboard(request):
+    # Check: Sirf Employer hi ye page dekh sake
+    if not request.user.is_employer:
+        return redirect('home')
+        
+    # Is employer ki saari jobs aur unke applications mangwana
+    my_jobs = Job.objects.filter(user=request.user).prefetch_related('applications')
+    
+    return render(request, 'jobs/dashboard.html', {'jobs': my_jobs})

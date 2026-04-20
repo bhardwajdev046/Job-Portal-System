@@ -39,13 +39,26 @@
                 </button>
                 
                 {% if user.is_authenticated %}
+                    {% if user.is_employer %}
+                        <a href="{% url 'employer_dashboard' %}" class="text-sm font-bold text-blue-600 dark:text-blue-400 hover:text-blue-500 transition-all">
+                            DASHBOARD
+                        </a>
+                        <a href="{% url 'post_job' %}" class="text-sm font-bold text-slate-600 dark:text-slate-300 hover:text-blue-500 transition-all">
+                            POST A JOB
+                        </a>
+                    {% endif %}
+
                     <form action="{% url 'logout' %}" method="post" class="inline">
                         {% csrf_token %}
                         <button type="submit" class="text-sm font-medium text-red-500 hover:text-red-600 transition-all">
                             LOGOUT
                         </button>
                     </form>
-                    <a href="{% url 'register' %}" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-full shadow-lg shadow-blue-500/30 transition-all transform hover:-translate-y-1">Join Now</a>
+                {% else %}
+                    <a href="{% url 'login' %}" class="text-sm font-medium dark:text-slate-300">Login</a>
+                    <a href="{% url 'register' %}" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-full shadow-lg shadow-blue-500/30 transition-all transform hover:-translate-y-1">
+                        Join Now
+                    </a>
                 {% endif %}
             </div>
         </div>
