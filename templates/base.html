@@ -1,6 +1,26 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
+    <style>
+    /* Animation ke waqt page side mein na hile */
+    body {
+        overflow-x: hidden;
+        width: 100%;
+    }
+
+    /* Custom Scrollbar for Premium Look */
+    ::-webkit-scrollbar {
+        width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+        background: #3b82f6; /* GlowBlue color */
+        border-radius: 10px;
+    }
+</style>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script>
         // Page load hote hi check karega user ki preference
         if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
@@ -97,5 +117,13 @@
             updateIcons();
         });
     </script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init({
+    duration: 1000, // Animation kitni der chalegi (1 second)
+    once: true,     // Kya animation sirf ek baar hogi?
+    offset: 100,    // Kitne distance scroll karne par trigger hogi
+  });
+</script>
 </body>
 </html>
